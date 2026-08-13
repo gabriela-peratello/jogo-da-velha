@@ -59,3 +59,7 @@ Antes de iniciar a instalação local, certifique-se de que o seu ambiente atend
 - **Interação Visual (Mouse / Touch):** Seleção direta das casas através do clique ou toque no tabuleiro.
 - **Interação Acessível (Teclado Numérico):** Suporte total ao mapeamento das teclas 1 a 9 do teclado numérico para preenchimento rápido das casas correspondentes na grade.
 - **Seleção de Temas e Avatares:** O usuário pode alterar o conjunto visual de ícones a qualquer momento no menu de configurações; a alteração será aplicada na rodada subsequente para manter a integridade da partida em andamento.
+
+
+Clonar repositório:
+Link: https://github.com/gabriela-peratello/jogo-da-velha.git
