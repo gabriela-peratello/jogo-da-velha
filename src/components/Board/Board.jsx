@@ -7,7 +7,7 @@ import Square from '../Square/Square';
 // Papel: Gerencia a renderização da grade 3x3 e a lógica de clique individual das casas.
 
 
-export default function Board({ xIsNext, squares, onPlay }) {
+export default function Board({ xIsNext, squares, onPlay, isGameOver }) {
 
   // FUNÇÃO: handleClick
   // Manipula a tentativa de jogada na casa de índice 'i'.
