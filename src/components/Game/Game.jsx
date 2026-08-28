@@ -6,17 +6,7 @@ import SelecionarAvatar from '../SelecionarAvatar/SelecionarAvatar';
 // import Scoreboard from '../ScoreBoard/ScoreBoard';
 // import SuddenDeath from '../SuddenDeath/SuddenDeath';
 
-const icones = {
-  classico: { x: '❌', o: '⭕' },
-  flores: { x: '🌻', o: '🌼' },
-  coracoes: { x: '❤', o: '💜' },
-  animais: { x: '🐍', o: '🐊' }
-};
 
-// guarda o tema escolhido pelo jogador
-const [AvatarEscolhido, setAvatarEscolhido] = useState ('classico')
-
-const avatarAtual = icones [AvatarEscolhido]
 
 
 
@@ -24,6 +14,36 @@ const avatarAtual = icones [AvatarEscolhido]
 // COMPONENTE CONTÊINER PRINCIPAL: Game (definido internamente)
 // Papel: Centraliza o estado global, o histórico de jogadas e a navegação temporal.
 export default function Game() {
+
+  const icones = {
+    classico: { x: '❌', o: '⭕' },
+    flores: { x: '🌻', o: '🌼' },
+    coracoes: { x: '❤', o: '💜' },
+    animais: { x: '🐍', o: '🐊' }
+  };
+
+  
+  const [AvatarEscolhido, setAvatarEscolhido] = useState('classico')
+
+  const avatarAtual = icones[AvatarEscolhido]
+
+
+
+  function calculateWinner(squares) {
+    const lines = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], // Linhas horizontais
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], // Linhas verticais
+      [0, 4, 8], [2, 4, 6]             // Diagonais
+    ];
+
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+        return squares[a]; // Retorna 'X' ou 'O'
+      }
+    }
+    return null; 
+  }
 
 
 
@@ -74,8 +94,10 @@ export default function Game() {
 
   return (
     <div className="game">
+      <SelecionarAvatar selectedAvatar={AvatarEscolhido}
+        temaTrocado={setAvatarEscolhido} />
       <div className="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} avatares={Avatar}/>
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} avatares={avatarAtual} />
       </div>
       <div className="game-info">
         <ol>{moves}</ol>
