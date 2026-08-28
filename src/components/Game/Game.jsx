@@ -1,11 +1,22 @@
 import { useState } from 'react';
 
 import Board from '../Board/Board';
+import SelecionarAvatar from '../SelecionarAvatar/SelecionarAvatar';
+
 // import Scoreboard from '../ScoreBoard/ScoreBoard';
 // import SuddenDeath from '../SuddenDeath/SuddenDeath';
-// import AvatarSelector from '../AvatarSelector/AvatarSelector';
-// import Ranking from '../Ranking/Ranking';
 
+const icones = {
+  classico: { x: '❌', o: '⭕' },
+  flores: { x: '🌻', o: '🌼' },
+  coracoes: { x: '❤', o: '💜' },
+  animais: { x: '🐍', o: '🐊' }
+};
+
+// guarda o tema escolhido pelo jogador
+const [AvatarEscolhido, setAvatarEscolhido] = useState ('classico')
+
+const avatarAtual = icones [AvatarEscolhido]
 
 
 
@@ -64,7 +75,7 @@ export default function Game() {
   return (
     <div className="game">
       <div className="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} avatares={Avatar}/>
       </div>
       <div className="game-info">
         <ol>{moves}</ol>

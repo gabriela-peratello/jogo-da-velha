@@ -1,5 +1,6 @@
 
 import Square from '../Square/Square';
+import styles from "./Board.module.css";
 
 
 // REQUISITOS: RF01 (Interatividade), RF04 (Vitória) e RF05 (Painel de Status)
