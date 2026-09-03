@@ -13,7 +13,6 @@ export default function Square({
     return (<button className="square" onClick={
         onSquareClick
     }
-
     > {
             value
         }

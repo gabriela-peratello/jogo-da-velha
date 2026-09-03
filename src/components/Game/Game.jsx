@@ -1,19 +1,19 @@
+// IMPORTAÇÕES
 import { useState, useEffect } from 'react';
-
 import Board from '../Board/Board';
 import SelecionarAvatar from '../SelecionarAvatar/SelecionarAvatar';
 import SuddenDeath from '../SuddenDeath/SuddenDeath';
 
 export default function Game() {
-  // --- 1. ESTADOS DO JOGO ---
+  // Estados jogo
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
 
-  // --- 2. ESTADOS DA MORTE SÚBITA ---
+  // Estados morte subita
   const [isSuddenDeath, setIsSuddenDeath] = useState(false);
   const [timeLeft, setTimeLeft] = useState(3);
 
-  // --- 3. SELEÇÃO DE AVATARES ---
+  // Avatares
   const icones = {
     classico: { x: '❌', o: '⭕' },
     flores: { x: '🌻', o: '🌼' },
@@ -23,11 +23,11 @@ export default function Game() {
   const [AvatarEscolhido, setAvatarEscolhido] = useState('classico');
   const avatarAtual = icones[AvatarEscolhido];
 
-  // --- 4. LÓGICA DERIVADA ---
+  // Logica derivada
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
-  // --- 5. CALCULADOR DE VENCEDOR ---
+  // Calcular vencedor
   function calculateWinner(squares) {
     if (!squares) return null;
     const lines = [
@@ -45,13 +45,13 @@ export default function Game() {
     return null;
   }
 
-  // --- 6. FUNÇÃO PARA PASSAR A VEZ POR TIMEOUT ---
+  // Passar a vez
   function handleTimeoutPassTurn() {
     setCurrentMove((prevMove) => prevMove + 1);
     setTimeLeft(3);
   }
 
-  // --- 7. TEMPORIZADOR DA MORTE SÚBITA ---
+  // Temporizador morte subita
   useEffect(() => {
     let relogio;
 
@@ -69,14 +69,14 @@ export default function Game() {
     return () => clearInterval(relogio);
   }, [isSuddenDeath]);
 
-  // --- 8. TROCA DE TURNO QUANDO O TEMPO ZERA ---
+  // Troca de turno
   useEffect(() => {
     if (isSuddenDeath && timeLeft === 0) {
       handleTimeoutPassTurn();
     }
   }, [timeLeft, isSuddenDeath]);
 
-  // --- 9. DETECTOR DE EMPATE E TRANSIÇÃO PARA MORTE SÚBITA ---
+  // Empate para morte subita
   useEffect(() => {
     if (!currentSquares) return;
 
@@ -97,7 +97,7 @@ export default function Game() {
     }
   }, [currentSquares, isSuddenDeath]);
 
-  // --- 10. MANIPULAÇÃO DE JOGADA ---
+  // Manipulação jogada
   function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);

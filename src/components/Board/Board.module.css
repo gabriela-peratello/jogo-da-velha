@@ -3,12 +3,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
 
-/* Mensagem de status no topo */
+
 .status {
   margin-bottom: 15px;
-  font-size: 1.2rem;
+  font-size: 2rem;
   font-weight: bold;
 }
 
@@ -16,4 +17,7 @@
 .boardRow {
   display: flex;
   flex-direction: row;
+  padding: 5px;
+  height: 100px;
+
 }
