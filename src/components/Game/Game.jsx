@@ -5,13 +5,17 @@ import SelecionarAvatar from '../SelecionarAvatar/SelecionarAvatar';
 import SuddenDeath from '../SuddenDeath/SuddenDeath';
 
 export default function Game() {
-  // Estados jogo
+
+  // Estados jogo 
+  // React -> Array do tabuleiro, cada jogada adiciona um novo estado
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
 
   // Estados morte subita
   const [isSuddenDeath, setIsSuddenDeath] = useState(false);
   const [timeLeft, setTimeLeft] = useState(3);
+
+
 
   // Avatares
   const icones = {
@@ -20,14 +24,27 @@ export default function Game() {
     coracoes: { x: '❤', o: '💜' },
     animais: { x: '🐍', o: '🐊' }
   };
-  const [AvatarEscolhido, setAvatarEscolhido] = useState('classico');
-  const avatarAtual = icones[AvatarEscolhido];
 
-  // Logica derivada
+
+
+
+
+
+  // Estado que guarda o tema selecionado + busca dinâmica do obj
+  const [avatarEscolhido, setAvatarEscolhido] = useState('classico');
+  const avatarAtual = icones[avatarEscolhido];
+
+  // Logica derivada -> Saber de quem é a vez -> Calcula se a jogada é par(X) ou impar(O)
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
+
+
+
+
+
   // Calcular vencedor
+  // React -> Confere as possíveis formas de vitória
   function calculateWinner(squares) {
     if (!squares) return null;
     const lines = [
@@ -45,13 +62,24 @@ export default function Game() {
     return null;
   }
 
-  // Passar a vez
+
+
+
+
+
+
+  //  React-> Passar a vez quando o tempo acaba
   function handleTimeoutPassTurn() {
+    // Atualiza o turno utilizando a forma de função
     setCurrentMove((prevMove) => prevMove + 1);
     setTimeLeft(3);
   }
 
-  // Temporizador morte subita
+
+
+
+
+  // Temporizador morte subita -> Contagem regressiva e função de limpeza 
   useEffect(() => {
     let relogio;
 
@@ -69,14 +97,26 @@ export default function Game() {
     return () => clearInterval(relogio);
   }, [isSuddenDeath]);
 
-  // Troca de turno
+
+
+
+
+
+
+  // Troca de turno -> Confere se morte subita eh vdd e se o tempo zerou, quando as duas sao vdd, dispara a função
   useEffect(() => {
     if (isSuddenDeath && timeLeft === 0) {
       handleTimeoutPassTurn();
     }
   }, [timeLeft, isSuddenDeath]);
 
-  // Empate para morte subita
+
+
+
+
+
+
+  // Empate para morte subita -> so eh disparada se ninguem vencer, tabuleiro cheio, morte subita false
   useEffect(() => {
     if (!currentSquares) return;
 
@@ -97,6 +137,11 @@ export default function Game() {
     }
   }, [currentSquares, isSuddenDeath]);
 
+
+
+
+
+
   // Manipulação jogada
   function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
@@ -108,10 +153,13 @@ export default function Game() {
     }
   }
 
+
+
+
+  // React -> Do código do react
   function jumpTo(nextMove) {
     setCurrentMove(nextMove);
   }
-
   const moves = history.map((squares, move) => {
     let description = move > 0 ? `Ir para jogada #${move}` : 'Jogar Novamente';
     return (
@@ -121,10 +169,15 @@ export default function Game() {
     );
   });
 
+
+
+
+
+
   return (
     <div className="game">
       <SelecionarAvatar
-        selectedAvatar={AvatarEscolhido}
+        selectedAvatar={avatarEscolhido}
         temaTrocado={setAvatarEscolhido}
       />
 
@@ -140,7 +193,9 @@ export default function Game() {
       </div>
 
       <div className="game-info">
-        <ol>{moves}</ol>
+        <button onClick={() => jumpTo(0)}>
+          🔄 Reiniciar Jogo
+        </button>
       </div>
     </div>
   );
