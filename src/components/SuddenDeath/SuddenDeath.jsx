@@ -1,17 +1,13 @@
-import styles from './SuddenDeath.module.css';
+// src/components/SuddenDeath/SuddenDeath.jsx
 
-
-//  mostra se o modo Morte Súbita ta valendo
-export default function SuddenDeath({ ativo, tempo }) {
-  // se o modo nao tiver ativo, nao aparece
-  if (!ativo) return null;
+export default function SuddenDeath({ isSuddenDeath, timeLeft }) {
+ 
+  if (!isSuddenDeath) return null;
 
   return (
-    <div className={styles.container}>
-      <h3 className={styles.titulo}> MORTE SÚBITA </h3>
-      <p className={styles.contador}>
-        Tempo para a jogada: <span>{tempo}s</span>
-      </p>
+    <div className="sudden-death-container">
+      <h2> MORTE SÚBITA </h2>
+      <p>Você tem <strong style={{ fontSize: '1.5rem', color: 'red' }}>{timeLeft}s</strong> para jogar!</p>
     </div>
   );
 }

@@ -38,24 +38,24 @@ export default function Board({ xIsNext, squares, onPlay, isGameOver, avatares }
   // RENDERIZAÇÃO DA GRADE 3x3:
   // Constrói as 3 linhas (board-row) contendo 3 componentes Square cada (índices 0 a 8).
   return (
-    <>
-      <div className="status">{status}</div>
-      <div className="board-row">
+    <div ClassName ={styles.board}>
+      <div className={styles.status}>{status}</div>
+      <div className={styles.board-row}>
         <Square value={iconeSquare(squares[0])} onSquareClick={() => handleClick(0)} />
         <Square value={iconeSquare(squares[1])} onSquareClick={() => handleClick(1)} />
         <Square value={iconeSquare(squares[2])} onSquareClick={() => handleClick(2)} />
       </div>
-      <div className="board-row">
+      <div className={styles.board-row}>
         <Square value={iconeSquare(squares[3])} onSquareClick={() => handleClick(3)} />
         <Square value={iconeSquare(squares[4])} onSquareClick={() => handleClick(4)} />
         <Square value={iconeSquare(squares[5])} onSquareClick={() => handleClick(5)} />
       </div>
-      <div className="board-row">
+      <div className={styles.board-row}>
         <Square value={iconeSquare(squares[6])} onSquareClick={() => handleClick(6)} />
         <Square value={iconeSquare(squares[7])} onSquareClick={() => handleClick(7)} />
         <Square value={iconeSquare(squares[8])} onSquareClick={() => handleClick(8)} />
       </div>
-    </>
+    </div>
   );
 }
 

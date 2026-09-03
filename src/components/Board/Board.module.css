@@ -1,0 +1,19 @@
+/* Container principal do tabuleiro */
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Mensagem de status no topo */
+.status {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Cada uma das 3 linhas de quadrados */
+.boardRow {
+  display: flex;
+  flex-direction: row;
+}
