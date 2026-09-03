@@ -1,7 +1,7 @@
-// src/components/SuddenDeath/SuddenDeath.jsx
 
 export default function SuddenDeath({ isSuddenDeath, timeLeft }) {
  
+  // Se Morte Súbita for falsa -> retorna null (ficando invisível)
   if (!isSuddenDeath) return null;
 
   return (
