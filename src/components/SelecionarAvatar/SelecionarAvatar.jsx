@@ -1,6 +1,6 @@
 import styles from './SelecionarAvatar.module.css';
 
-// duas props: avatarSelecionado: avisa ql tema deve ficar marcado 
+// Duas props: AvatarSelecionado: avisa qual tema deve ficar marcado 
 export default function SelecionarAvatar({ avatarSelecionado, temaTrocado }) {
   return (
     <div className={styles.container}>
@@ -9,13 +9,13 @@ export default function SelecionarAvatar({ avatarSelecionado, temaTrocado }) {
         Escolha o estilo dos Avatares:
       </label>
       
-      {/*  mostra a troca de opção no menu e envia o novo valor (e.target.value) para atualizar o estado */}
+      {/*Quando o usuário escolhe um tema, é disparado um efeito de mudança -> Captura o valor e repassa ao componente pai */}
       <select id="avatar-selecao" className={styles.select} value={avatarSelecionado} onChange={(e) => temaTrocado(e.target.value)}>
 
         <option value="classico">Clássico (❌ / ⭕)</option>
         <option value="flores">Flores (🌻 / 🌼)</option>
         <option value="coracoes">Corações (❤ / 💜)</option>
-        <option value="animais">animais (🐍 / 🐊)</option>
+        <option value="animais">Animais (🐍 / 🐊)</option>
 
       </select>
     </div>
