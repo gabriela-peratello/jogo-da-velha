@@ -17,7 +17,7 @@
 .boardRow {
   display: flex;
   flex-direction: row;
-  padding: 5px;
-  height: 100px;
-
+  justify-content: center;
+  gap: 10px;               
+  margin-bottom: 10px;     
 }

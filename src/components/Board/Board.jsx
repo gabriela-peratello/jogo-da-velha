@@ -37,7 +37,7 @@ export default function Board({ xIsNext, squares, onPlay, isGameOver, avatares }
   // Grade jogo -> Apenas as classes foram modificadas
   return (
     <div className ={styles.board}>
-      <div className={styles.status}>Status do Jogo</div>
+      {/* <div className={styles.status}>Status do Jogo</div> */}
       <div className={styles.boardRow}>
         <Square value={iconeSquare(squares[0])} onSquareClick={() => handleClick(0)} />
         <Square value={iconeSquare(squares[1])} onSquareClick={() => handleClick(1)} />

@@ -16,6 +16,11 @@ export default function Game() {
   const [timeLeft, setTimeLeft] = useState(3);
 
 
+  // Estados os nomes 
+  const [jogadorX, setJogadorX] = useState('Jogador 1');
+  const [jogadorO, setJogadorO] = useState('Jogador 2');
+
+
 
   // Avatares
   const icones = {

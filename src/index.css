@@ -1,0 +1,40 @@
+/* ==========================================================================
+   DESIGN SYSTEM & VARIÁVEIS GLOBAIS
+   ========================================================================== */
+:root {
+  /* Paleta de Cores */
+  --bg-primary: #461e1e;
+  --bg-card: #793939;
+  --accent-color: #ffa2a2;
+  --accent-hover: #a15c5c;
+  --danger-color: #f38ba8;
+  --text-main: #ffc6c6;
+  --text-muted: #ffcaca;
+
+  /* Tipografia & Bordas */
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-family);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.titulo{
+  padding: 100px;
+}
