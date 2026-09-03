@@ -1,65 +1,119 @@
-# Jogo da Velha Evoluído - Black Clover Edition
+📚 PLANO DETALHADO DO PROJETO: JOGO DA VELHA REFACTORED
+📌 Capitulo 1: Planejamento, Visão Geral e Regras de Negócio
+Objetivo: Mapear os requisitos antes de escrever qualquer linha de código.
 
-## 1. Visão Geral e Objetivo do Projeto
-Este projeto consiste no desenvolvimento de uma aplicação web do tipo SPA (Single Page Application), construída sobre a biblioteca React e utilizando Vite como ferramenta de build. O objetivo fundamental da aplicação é evoluir a mecânica clássica do jogo da velha tradicional, transformando uma estrutura simples de tabuleiro em uma plataforma interativa, competitiva e com alta riqueza de feedback multimídia.
+1.1 Visão Geral do Projeto:
 
-A aplicação conta com uma identidade visual temática inspirada no universo do anime Black Clover, trazendo suporte ao modo escuro (Dark Mode) nativo, customização de avatares em tempo real, sorteio automatizado de início de turno, controle contínuo de placar e ranking acumulativo, sistema de áudio adaptativo e a implementação da mecânica exclusiva de Morte Súbita cronometrada para cenários de empate.
+O que o projeto faz de diferente do tutorial padrão do React? (Ex.: suporte a troca de avatares/temas, temporizador Morte Súbita, nomes de jogadores customizados).
 
----
+1.2 Mapeamento de Regras de Negócio (RN):
 
-## 2. Tecnologias Utilizadas e Arquitetura
+RN01 - Turnos: O jogador do turno atual clica em uma casa vazia para marcar seu símbolo.
 
-- **React 18+:** Biblioteca principal para criação da interface de usuário baseada em componentes reutilizáveis, imutabilidade e gerenciamento de estado declarativo.
-- **Vite:** Ferramenta de build de alta performance responsável pelo servidor de desenvolvimento e pelo empacotamento otimizado para produção.
-- **JavaScript (ES6+):** Linguagem base para a implementação dos algoritmos de validação de vitória, temporizadores e manipulação dos estados do jogo.
-- **CSS3 / CSS Modules:** Estilização modular com escopo fechado por componente, aplicando a metodologia BEM (Block Element Modifier) e variáveis CSS para controle centralizado do Design System.
-- **HTML5 Semântico e ARIA:** Estruturação acessível com atributos para leitores de tela e suporte completo para navegação via teclado.
+RN02 - Bloqueio: Casas já preenchidas ou jogos com vencedor definido não aceitam novos cliques.
 
----
+RN03 - Condição de Vitória: 3 símbolos iguais alinhados (linhas, colunas ou diagonais).
 
-## 3. Instruções de Instalação e Execução
+RN04 - Empate (Velha): 9 casas preenchidas sem nenhum alinhamento vencedor.
 
-### Pré-requisitos Técnicos
-Antes de iniciar a instalação local, certifique-se de que o seu ambiente atende aos seguintes requisitos:
-- Node.js instalado na versão 18.0.0 ou superior.
-- Gerenciador de pacotes NPM (incluso no Node.js) ou Yarn.
+RN05 - Morte Súbita (Regra Especial): Temporizador regressivo de 3 segundos por jogada ativado em cenários específicos.
 
-### Passos para Execução do Projeto
-1. Realize o clone do repositório remoto para o seu diretório local:
-   git clone <URL_DO_SEU_REPOSITORIO>
+1.3 Requisitos Funcionais (RF):
 
-2. Acesse a pasta raiz do projeto via terminal:
-   cd nome-do-repositorio
+RF01: O sistema deve permitir alterar o tema dos avatares (Classico, Flores, Coracoes, Animais).
 
-3. Execute o comando de instalação para baixar todas as dependências mapeadas:
-   npm install
+RF02: O sistema deve exibir quem é o próximo a jogar e qual o resultado da partida.
 
-4. Inicie o servidor de desenvolvimento local:
-   npm run dev
+RF03: O sistema deve armazenar o histórico de jogadas e permitir navegar entre elas ("viagem no tempo").
 
-5. Acesse o endereço disponibilizado no terminal em seu navegador (por padrão, http://localhost:5173).
+📌 Capitulo 2: Configuração do Ambiente e Design System
+Objetivo: Estruturar a infraestrutura do projeto e garantir uma estilização modular e escalável.
 
----
+2.1 Configuração inicial:
 
-## 4. Instruções de Jogabilidade e Regras de Negócio
+Criação do projeto com React + Vite.
 
-### Regras do Jogo Tradicional
-1. A cada nova rodada, o tabuleiro 3x3 é completamente limpo e o sistema executa um sorteio aleatório (com probabilidade 50/50) para determinar qual jogador realizará a primeira jogada.
-2. Os jogadores realizam jogadas de forma estritamente alternada. Não é permitido sobrescrever casas previamente marcadas ou executar jogadas após o encerramento do round.
-3. Para vencer uma rodada, o jogador deve alinhar três ícones idênticos na horizontal, vertical ou diagonal.
-4. O placar da partida monitora a pontuação em tempo real. Quando um jogador atinge a marca de 3 vitórias na partida corrente, o placar do round é zerado e o ponto de vitória final é contabilizado no Ranking Acumulativo Geral.
+Limpeza de arquivos desnecessários gerados pelo modelo padrão.
 
-### Regra Especial: Modo Morte Súbita (Pós-Empate)
-1. Se todas as 9 casas do tabuleiro forem preenchidas sem que haja um alinhamento vencedor, a rodada é declarada como empate.
-2. A rodada imediatamente seguinte a um empate ativa de forma automática o modo Morte Súbita, introduzindo pressão de tempo sobre os jogadores.
-3. No modo Morte Súbita, cada jogador dispõe de um limite estrito de 3 segundos para selecionar uma casa e efetuar a sua jogada.
-4. Se o cronômetro de 3 segundos zerar sem uma ação do jogador, ele perde o turno corrente e a vez é repassada automaticamente ao adversário. Caso o adversário também não jogue a tempo, os turnos continuam alternando sucessivamente a cada 3 segundos até que uma marcação válida seja realizada no tabuleiro.
+2.2 Arquitetura de Pastas:
 
-### Métodos de Interação e Acessibilidade
-- **Interação Visual (Mouse / Touch):** Seleção direta das casas através do clique ou toque no tabuleiro.
-- **Interação Acessível (Teclado Numérico):** Suporte total ao mapeamento das teclas 1 a 9 do teclado numérico para preenchimento rápido das casas correspondentes na grade.
-- **Seleção de Temas e Avatares:** O usuário pode alterar o conjunto visual de ícones a qualquer momento no menu de configurações; a alteração será aplicada na rodada subsequente para manter a integridade da partida em andamento.
+Plaintext
+src/
+├── components/          # Componentes modulares
+│   ├── Board/
+│   ├── Square/
+│   ├── SelecionarAvatar/
+│   └── SuddenDeath/
+├── index.css            # Variáveis CSS globais e Reset
+└── main.jsx             # Ponto de entrada da aplicação
+2.3 Design System & Variáveis CSS (index.css):
 
+Criação das variáveis :root para cores, fontes, sombras e bordas.
 
-Clonar repositório:
-Link: https://github.com/gabriela-peratello/jogo-da-velha.git
+Isolamento das regras específicas de estilo usando CSS Modules (Componente.module.css).
+
+📌 Capitulo 3: Componentização e Hierarquia
+Objetivo: Dividir a interface em componentes reutilizáveis mantendo responsabilidades claras.
+
+3.1 Diagrama de Hierarquia:
+
+Game (Componente Pai / Estado Global)
+
+SelecionarAvatar (Formulário controlado)
+
+SuddenDeath (Display do temporizador)
+
+Board (Estrutura do tabuleiro 3x3)
+
+Square (Botão individual / Átomo)
+
+3.2 Fluxo de Props:
+
+Elevação de Estado (Lifting State Up): o Game centraliza o estado e passa dados e funções manipuladoras (onPlay, temaTrocado) via props para os filhos.
+
+📌 Capitulo 4: Estado, Lógica do Jogo e Imutabilidade
+Objetivo: Implementar as regras de negócio e garantir previsibilidade nos estados.
+
+4.1 Imutabilidade em Arrays:
+
+Uso do operador Spread ([...]) e do método .slice() para atualizar o histórico sem alterar o estado diretamente (mutation-free).
+
+4.2 Gerenciamento Assíncrono e Efeitos (useEffect):
+
+Temporizador do modo Morte Súbita gerenciado com setInterval e função de limpeza (cleanup function) para evitar vazamento de memória (memory leaks).
+
+4.3 Funções Auxiliares:
+
+calculateWinner(squares): Algoritmo de verificação das 8 combinações de vitória possíveis.
+
+📌 Capitulo 5: Refatoração, UX/UI e Acessibilidade
+Objetivo: Polir o visual, garantir usabilidade e tornar a aplicação inclusiva.
+
+5.1 Layout Responsivo:
+
+Organização com CSS Grid e Flexbox para adaptação automática a telas de celulares e computadores.
+
+5.2 Acessibilidade (a11y):
+
+Uso de tags semânticas HTML5 (<main>, <section>, <button>, <label>).
+
+Atributos como aria-label e estados visuais :focus-visible para navegação via teclado.
+
+5.3 Boas Práticas e Clean Code:
+
+Nomes descritivos para variáveis/estados (isSuddenDeath, timeLeft, avatarAtual).
+
+Separação rigorosa entre componentes de lógica (containers) e componentes visuais (apresentação).
+
+📌 Capitulo 6: Documentação e Relatório Técnico Final
+Objetivo: Consolidar todo o aprendizado em uma documentação técnica pronta para portfólio.
+
+6.1 Estrutura do Relatório:
+
+Visão geral e justificativa das escolhas técnicas.
+
+Mapeamento de componentes e decisões de arquitetura.
+
+Especificação detalhada do código-fonte (propósito de cada função).
+
+Criação do arquivo README.md detalhado na raiz do repositório.
