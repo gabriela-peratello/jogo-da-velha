@@ -6,10 +6,12 @@ import SuddenDeath from '../SuddenDeath/SuddenDeath';
 
 export default function Game() {
 
+  
   // Estados jogo 
   // React -> Array do tabuleiro, cada jogada adiciona um novo estado
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
+
 
   // Estados morte subita
   const [isSuddenDeath, setIsSuddenDeath] = useState(false);
@@ -19,6 +21,7 @@ export default function Game() {
   // Estados os nomes 
   const [jogadorX, setJogadorX] = useState('Jogador 1');
   const [jogadorO, setJogadorO] = useState('Jogador 2');
+
 
 
 
@@ -33,8 +36,6 @@ export default function Game() {
 
 
 
-
-
   // Estado que guarda o tema selecionado + busca dinâmica do obj
   const [avatarEscolhido, setAvatarEscolhido] = useState('classico');
   const avatarAtual = icones[avatarEscolhido];
@@ -42,8 +43,6 @@ export default function Game() {
   // Logica derivada -> Saber de quem é a vez -> Calcula se a jogada é par(X) ou impar(O)
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
-
-
 
 
 
@@ -70,16 +69,12 @@ export default function Game() {
 
 
 
-
-
-
   //  React-> Passar a vez quando o tempo acaba
   function handleTimeoutPassTurn() {
     // Atualiza o turno utilizando a forma de função
     setCurrentMove((prevMove) => prevMove + 1);
     setTimeLeft(3);
   }
-
 
 
 
@@ -105,17 +100,12 @@ export default function Game() {
 
 
 
-
-
-
   // Troca de turno -> Confere se morte subita eh vdd e se o tempo zerou, quando as duas sao vdd, dispara a função
   useEffect(() => {
     if (isSuddenDeath && timeLeft === 0) {
       handleTimeoutPassTurn();
     }
   }, [timeLeft, isSuddenDeath]);
-
-
 
 
 
@@ -141,8 +131,6 @@ export default function Game() {
       return () => clearTimeout(timerId);
     }
   }, [currentSquares, isSuddenDeath]);
-
-
 
 
 
@@ -173,8 +161,6 @@ export default function Game() {
       </li>
     );
   });
-
-
 
 
 
