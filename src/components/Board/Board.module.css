@@ -6,7 +6,6 @@
 
 }
 
-
 .status {
   margin-bottom: 15px;
   font-size: 2rem;
@@ -20,4 +19,31 @@
   justify-content: center;
   gap: 10px;               
   margin-bottom: 10px;     
+}
+
+
+.square {
+  width: 60px;
+  height: 60px;
+  position: relative; /* Importante para a linha se posicionar sobre o botão */
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* Quadrado campeão */
+.winning {
+  background-color: #e0f2fe; /* Destaque de fundo suave */
+}
+
+/* A linha que risca a casa */
+.winning::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  width: 80%;
+  height: 4px;
+  background-color: #0284c7; /* Cor da linha que risca */
+  transform: translateY(-50%);
+  border-radius: 2px;
 }

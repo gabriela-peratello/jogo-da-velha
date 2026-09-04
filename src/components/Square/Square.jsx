@@ -1,10 +1,12 @@
-// COMPONENTE: Square
-// Papel: Componente de apresentação individual de cada casa (quadrado) da grade 3x3.
-
 import styles from './Square.module.css';
 
+export default function Square({ value, onSquareClick, isWinningSquare }) {
+  // Se for o quadrado vencedor, junta a classe padrão com a classe de destaque
+  const squareClasses = `${styles.square} ${isWinningSquare ? styles.winning : ''}`;
 
-// Recebe o valor calculado pelo componente pai via props e o exibe no botão
-export default function Square({value, onSquareClick}) {
-    return (<button className={styles.square} onClick={onSquareClick}> {value}</button>);}
-
+  return (
+    <button className={squareClasses} onClick={onSquareClick}>
+      {value}
+    </button>
+  );
+}
